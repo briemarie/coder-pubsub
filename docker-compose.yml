@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  app:
+    container_name: app
+    build: .
+    ports: 
+      - 8080:8080
+    restart: on-failure
+    volumes:
+      - api:/usr/src/app/
+    networks:
+      - stack
+
+volumes:
+  api:
+  database_postgres:
+
+networks:
+  stack:
+    driver: bridge

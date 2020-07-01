@@ -1,0 +1,20 @@
+Welcome to the Coder PubSub Messenger App!
+
+To get started, you will need to have Go and Docker installed. You will also need this repo in your go directory (mine is go/src/). Then follow these steps:
+
+1. Ensure that Docker is running on your computer
+2. Navigate into the root of this directory in your terminal
+3. Run `docker-compose up` - this will boot up the API
+
+The app should be ready to go at this point. Visit http://localhost:8080/ in a browser or through curl to verify that the app is running.
+
+
+Some notes on my work:
+
+I was unfamiliar with implementing websockets and was not familiar with what a pubsub service was, so I spent a fair amount of time reading documentation and tutorials. From my new understanding, I settled on putting together this simple websocket server. It seemed like the pubsub system was already inherent in the websocket read/write messages so I used that, which has the added benefit of preventing race conditions by only having one concurrent reader and one concurrent writer standard in the connection.
+
+Due to lack of familiarity and not wanting to spend too much time past the 3 hours, I wasn't sure how to setup the different endpoints for adding a subscription and for publishing a message with websockets. I know how to do this when setting up a typical API server with router, complete with a database to save to and fetch data from, but with everything being real-time and no storage, I would have liked some more time to figure this piece out.
+
+I know that familiarity with Docker is a skill you're looking for, so I figured it would be a quick win to Dockerize the app. I didn't spend any extra time on this as I already had this setup for myself for when I play around with building APIs, but hope it showcases something I am familiar with since the rest was a bit of an experiment.
+
+Finally, I acknowledge that my "unit test" isn't really a unit test and is only opening and closing a websocket connection, but again with some more time I think I could have figured out the endpoints and been able to unit test subscriptions and messages coming through the channels.
